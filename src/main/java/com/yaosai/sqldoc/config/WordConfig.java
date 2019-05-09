@@ -35,13 +35,9 @@ public class WordConfig {
             try {
                 Font titleStyle = FontStyle.getStyle(0);
                 // 设置全局文档名称
-                Paragraph paragraph = new Paragraph();
-                Font f = new Font();
-                f.setSize(14);
                 Paragraph p = new Paragraph(baseName + "数据库设计文档",titleStyle);
                 p.setAlignment(1);
                 document.add(p);
-                paragraph.setFont(f);
                 List databaseList = sqlDocService.getTableInfo(baseName);
                 String[] titleStr = {"表名","注释"};
                 Table database = wordUtils.createTable(databaseList,titleStr);
