@@ -37,10 +37,21 @@ public class WordConfig {
                 //设置全局文档名称
                 Paragraph paragraph = new Paragraph();
                 Font f = new Font();
-                Paragraph p = new Paragraph("数据库表结构说明", new Font(Font.NORMAL, 18, Font.BOLD, new Color(0, 0, 0)));
+                Paragraph p = new Paragraph(baseName + "数据库设计文档", new Font(Font.NORMAL, 18, Font.BOLD, new Color(0, 0, 0)));
                 p.setAlignment(1);
                 document.add(p);
                 paragraph.setFont(f);
+                List databaseList = sqlDocService.getTableInfo(baseName);
+                Table database = wordUtils.createDatabaseTable(databaseList);
+                document.add(new Paragraph(""));
+                Paragraph databaseTitle = new Paragraph("全表说明", new Font(Font.NORMAL, 18, Font.BOLD, new Color(0, 0, 0)));
+                databaseTitle.setFirstLineIndent(40f);
+                document.add(databaseTitle);
+                document.add(database);
+                Paragraph pl = new Paragraph("数据库表结构说明", new Font(Font.NORMAL, 18, Font.BOLD, new Color(0, 0, 0)));
+                document.add(new Paragraph(""));
+                document.add(pl);
+
                 for (String tableName : tableNames) {
                     List list = sqlDocService.getColumnInfo(baseName, tableName);
                     Table table = wordUtils.createTable(list);
@@ -54,7 +65,6 @@ public class WordConfig {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         };
     }
 }
