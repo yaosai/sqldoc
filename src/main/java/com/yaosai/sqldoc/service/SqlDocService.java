@@ -10,7 +10,7 @@ public interface SqlDocService {
 
     List<String> getAllTableName(String database);
 
-    String getTableInfo(String tableName);
+    List getTableInfo(String database);
 
     List getColumnInfo(String baseName, String tableName);
 }

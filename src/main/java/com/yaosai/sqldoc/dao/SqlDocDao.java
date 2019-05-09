@@ -32,17 +32,16 @@ public class SqlDocDao {
     }
 
     /**
-     * 功能描述: 获取表信息
+     * 功能描述: 获取全库表信息
      *
-     * @param
-     * @return
+     * @param database 数据库名
+     * @return 全库表信息
      * @author YaoS
      * @date 19/5/8 11:56
      */
-    public String getTableInfo(String tableName) {
-        String sql = "SELECT " + tableName + " FROM config LIMIT 1";
-        Object obj = entityManager.createNativeQuery(sql).getSingleResult();
-        return String.valueOf(obj);
+    public List getTableInfo(String database) {
+        String sql = "select table_name tableName,TABLE_COMMENT tableComment from INFORMATION_SCHEMA.TABLES Where table_schema = '" + database + "'";
+        return entityManager.createNativeQuery(sql).getResultList();
     }
 
     /**
@@ -56,7 +55,7 @@ public class SqlDocDao {
      */
 
     public List getColumnInfo(String database, String tableName) {
-        StringBuffer sb = new StringBuffer("SELECT COLUMN_NAME columnName, COLUMN_COMMENT columnCn, COLUMN_TYPE columnType,");
+        StringBuffer sb = new StringBuffer("SELECT COLUMN_NAME columnName, COLUMN_TYPE columnType,");
         sb.append("(case COLUMN_KEY when 'MUL' then '可以重复' when 'UNI' then '唯一约束' when 'PRI' then '主键约束' ");
         sb.append("ELSE COLUMN_KEY END) columnKey,");
         sb.append("(case IS_NULLABLE when 'NO' then '否' when 'YES' then '是' END) isNullable, ");

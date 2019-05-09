@@ -29,7 +29,6 @@ public class WordConfig {
     public CommandLineRunner demo(SqlDocService sqlDocService) {
         return (args) -> {
             WordUtils wordUtils = new WordUtils();
-//            String baseName = "jd_platform_chen";
             List<String> tableNames = sqlDocService.getAllTableName(baseName);
             Document document = new Document(PageSize.A4);
             RtfWriter2.getInstance(document, new FileOutputStream(path));
@@ -46,7 +45,9 @@ public class WordConfig {
                     List list = sqlDocService.getColumnInfo(baseName, tableName);
                     Table table = wordUtils.createTable(list);
                     document.add(new Paragraph(""));
-                    document.add(new Paragraph(tableName + "表结构说明"));
+                    Paragraph tableTitle = new Paragraph(tableName + "表结构说明", new Font(Font.NORMAL, 18, Font.BOLD, new Color(0, 0, 0)));
+                    tableTitle.setFirstLineIndent(40f);
+                    document.add(tableTitle);
                     document.add(table);
                 }
                 document.close();

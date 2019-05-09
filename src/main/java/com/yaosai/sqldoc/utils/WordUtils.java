@@ -26,14 +26,13 @@ public class WordUtils {
         /*
          * 创建有六列的表格
          */
-        Table table = new Table(6);
+        Table table = new Table(5);
         table.setBorderWidth(1);
         table.setBorderColor(Color.BLACK);
         table.setPadding(0);
         table.setSpacing(0);
 
         table.addCell("字段名");
-        table.addCell("字段中文名");
         table.addCell("数据类型");
         table.addCell("是否为键 ");
         table.addCell("默认为空");
@@ -51,6 +50,5 @@ public class WordUtils {
         table.addCell(new Paragraph((String) cells[2]));
         table.addCell(new Paragraph((String) cells[3]));
         table.addCell(new Paragraph((String) cells[4]));
-        table.addCell(new Paragraph((String) cells[5]));
     }
 }

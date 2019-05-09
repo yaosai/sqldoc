@@ -23,8 +23,8 @@ public class SqlDocServiceImpl implements SqlDocService {
     }
 
     @Override
-    public String getTableInfo(String tableName) {
-        return sqlDocDao.getTableInfo(tableName);
+    public List getTableInfo(String database) {
+        return sqlDocDao.getTableInfo(database);
     }
 
     @Override
